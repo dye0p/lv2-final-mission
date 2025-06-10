@@ -23,7 +23,7 @@ public class ReservationController {
 
     @GetMapping("/reservations")
     public ResponseEntity<List<ReservationResponse>> findAll() {
-        List<ReservationResponse> response = reservationService.findAll();
+        final List<ReservationResponse> response = reservationService.findAll();
         return ResponseEntity.ok(response);
     }
 }

@@ -1,11 +1,11 @@
 package finalmission.woowabowling.member;
 
 public record LoginRequest(
-        String name,
+
         String email,
         String password
 ) {
-    public Member toMember() {
+    public Member toMember(final String name) {
         return Member.from(name, email, password);
     }
 }

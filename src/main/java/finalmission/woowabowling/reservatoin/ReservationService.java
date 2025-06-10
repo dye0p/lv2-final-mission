@@ -1,5 +1,6 @@
 package finalmission.woowabowling.reservatoin;
 
+import finalmission.woowabowling.member.LoginMember;
 import finalmission.woowabowling.member.Member;
 import finalmission.woowabowling.member.MemberRepository;
 import java.util.List;
@@ -30,6 +31,17 @@ public class ReservationService {
 
     public List<ReservationResponse> findAll() {
         final List<Reservation> reservations = reservationRepository.findAll();
+        return reservations.stream()
+                .map(ReservationResponse::of)
+                .toList();
+    }
+
+    public List<ReservationResponse> finaAllByMember(final LoginMember loginMember) {
+        System.out.println("memberId" + loginMember.id());
+        System.out.println("==============");
+        final List<Reservation> reservations = reservationRepository.findByMemberId(loginMember.id());
+        System.out.println("==============");
+
         return reservations.stream()
                 .map(ReservationResponse::of)
                 .toList();

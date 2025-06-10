@@ -1,5 +1,6 @@
 package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.member.LoginMember;
 import finalmission.woowabowling.member.LoginRequest;
 import finalmission.woowabowling.member.Member;
 import finalmission.woowabowling.member.MemberRepository;
@@ -22,4 +23,21 @@ public class AuthService {
         return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("이메일과 일치하는 회원을 찾을 수 없습니다."));
     }
+
+    public LoginMember findLoginMemberByToken(final String token) {
+        final Member member = findMemberByToken(token);
+        return new LoginMember(member.getId(), member.getName(), member.getEmail());
+    }
+
+    private Member findMemberByToken(final String token) {
+        final Long id = jwtTokenProvider.getSubjectFromPayloadBy(token);
+        return findMemberById(id);
+    }
+
+    private Member findMemberById(final Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다. 회원가입 또는 로그인을 해주세요"));
+    }
+
+
 }

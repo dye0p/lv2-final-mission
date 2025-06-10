@@ -2,6 +2,7 @@ package finalmission.woowabowling.reservatoin;
 
 import finalmission.woowabowling.member.Member;
 import finalmission.woowabowling.member.MemberRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,5 +26,12 @@ public class ReservationService {
     private Member findMember(final long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+    }
+
+    public List<ReservationResponse> findAll() {
+        final List<Reservation> reservations = reservationRepository.findAll();
+        return reservations.stream()
+                .map(ReservationResponse::of)
+                .toList();
     }
 }

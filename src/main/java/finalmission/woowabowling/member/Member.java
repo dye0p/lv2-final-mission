@@ -1,4 +1,4 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

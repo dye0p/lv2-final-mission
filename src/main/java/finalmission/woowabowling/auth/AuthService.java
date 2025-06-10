@@ -1,5 +1,8 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.member.LoginRequest;
+import finalmission.woowabowling.member.Member;
+import finalmission.woowabowling.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

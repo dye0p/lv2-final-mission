@@ -1,5 +1,6 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.member.Member;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import javax.crypto.SecretKey;

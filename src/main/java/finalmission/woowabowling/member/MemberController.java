@@ -1,4 +1,4 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.member;
 
 import java.net.URI;
 import lombok.RequiredArgsConstructor;

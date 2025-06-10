@@ -1,4 +1,4 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.auth;
 
 import jakarta.servlet.http.Cookie;
 import org.springframework.stereotype.Component;

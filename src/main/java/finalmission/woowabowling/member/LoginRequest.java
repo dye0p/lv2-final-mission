@@ -1,4 +1,4 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.member;
 
 public record LoginRequest(
         String name,

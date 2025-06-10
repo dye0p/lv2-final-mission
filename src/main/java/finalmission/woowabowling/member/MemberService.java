@@ -1,4 +1,4 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

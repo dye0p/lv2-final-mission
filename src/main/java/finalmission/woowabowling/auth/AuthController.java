@@ -1,5 +1,6 @@
-package finalmission.woowabowling;
+package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.member.LoginRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

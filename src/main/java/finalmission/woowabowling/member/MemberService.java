@@ -11,7 +11,6 @@ public class MemberService {
     private final RandomNameRestClient randomNameRestClient;
     private final MemberRepository memberRepository;
 
-
     public Long register(final LoginRequest loginRequest) {
         final String name = randomNameRestClient.requestConfirm();
         final Member member = loginRequest.toMember(name);

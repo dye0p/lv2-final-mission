@@ -5,7 +5,9 @@ import finalmission.woowabowling.reservatoin.ReservationService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -18,5 +20,12 @@ public class MemberReservationController {
     public ResponseEntity<List<ReservationResponse>> findAll(final LoginMember loginMember) {
         final List<ReservationResponse> response = reservationService.finaAllByMember(loginMember);
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/reservations-mine/{id}")
+    public ResponseEntity<Long> cancel(final LoginMember loginMember,
+                                       @PathVariable(name = "id") final Long reservationId) {
+        final Long deleteId = reservationService.cancel(loginMember, reservationId);
+        return ResponseEntity.ok(deleteId);
     }
 }

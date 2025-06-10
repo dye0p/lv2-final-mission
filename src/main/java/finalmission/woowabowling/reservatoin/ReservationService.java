@@ -24,11 +24,6 @@ public class ReservationService {
         return ReservationResponse.of(savedReservation);
     }
 
-    private Member findMember(final long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-    }
-
     public List<ReservationResponse> findAll() {
         final List<Reservation> reservations = reservationRepository.findAll();
         return reservations.stream()
@@ -37,13 +32,30 @@ public class ReservationService {
     }
 
     public List<ReservationResponse> finaAllByMember(final LoginMember loginMember) {
-        System.out.println("memberId" + loginMember.id());
-        System.out.println("==============");
         final List<Reservation> reservations = reservationRepository.findByMemberId(loginMember.id());
-        System.out.println("==============");
-
         return reservations.stream()
                 .map(ReservationResponse::of)
                 .toList();
+    }
+
+    @Transactional
+    public Long cancel(final LoginMember loginMember, final Long id) {
+        final Member member = findMember(loginMember.id());
+        final List<Reservation> memberReservations = reservationRepository.findByMemberId(member.getId());
+
+        final Reservation reservation = memberReservations.stream()
+                .filter(memberReservation -> memberReservation.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 예약이거나, 해당 회원의 예약이 아닙니다."));
+
+        reservationRepository.deleteById(reservation.getId());
+
+        return reservation.getId();
+    }
+
+
+    private Member findMember(final long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
     }
 }

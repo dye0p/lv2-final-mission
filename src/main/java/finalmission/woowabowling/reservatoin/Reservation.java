@@ -14,7 +14,9 @@ import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -56,6 +58,20 @@ public class Reservation {
     public static Reservation from(final Member member, final Long laneId, final Long memberCount, final Long gameCount,
                                    final LocalDate date, final LocalTime time) {
         return new Reservation(member, laneId, memberCount, gameCount, date, time);
+    }
+
+    public void update(
+            final long laneId,
+            final long memberCount,
+            final long gameCount,
+            final LocalDate date,
+            final LocalTime time
+    ) {
+        this.laneId = laneId;
+        this.memberCount = memberCount;
+        this.gameCount = gameCount;
+        this.date = date;
+        this.time = time;
     }
 
     public String getMemberName() {

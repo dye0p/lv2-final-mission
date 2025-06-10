@@ -2,12 +2,15 @@ package finalmission.woowabowling.member;
 
 import finalmission.woowabowling.reservatoin.ReservationResponse;
 import finalmission.woowabowling.reservatoin.ReservationService;
+import finalmission.woowabowling.reservatoin.UpdateReservationRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -28,4 +31,15 @@ public class MemberReservationController {
         final Long deleteId = reservationService.cancel(loginMember, reservationId);
         return ResponseEntity.ok(deleteId);
     }
+
+    @PostMapping("/reservations-mine/{id}")
+    public ResponseEntity<ReservationResponse> update(
+            final LoginMember loginMember,
+            @PathVariable(name = "id") final Long reservationId,
+            @RequestBody final UpdateReservationRequest request
+    ) {
+        final ReservationResponse response = reservationService.update(loginMember, reservationId, request);
+        return ResponseEntity.ok(response);
+    }
+
 }

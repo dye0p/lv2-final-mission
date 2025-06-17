@@ -65,7 +65,13 @@ public class ReservationService {
         final List<Reservation> memberReservations = reservationRepository.findByMemberId(member.getId());
 
         final Reservation reservation = findReservationBy(id, memberReservations);
-        updateReservation(request, reservation, lane);
+        reservation.update(
+                lane,
+                request.memberCount(),
+                request.gameCount(),
+                request.reservationDate(),
+                request.reservationTime()
+        );
 
         return ReservationRegisterResponse.of(reservation);
     }
@@ -87,14 +93,4 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 예약이거나, 해당 회원의 예약이 아닙니다."));
     }
 
-    private void updateReservation(final ReservationUpdateRequest request, final Reservation reservation,
-                                   final Lane lane) {
-        reservation.update(
-                lane,
-                request.memberCount(),
-                request.gameCount(),
-                request.reservationDate(),
-                request.reservationTime()
-        );
-    }
 }

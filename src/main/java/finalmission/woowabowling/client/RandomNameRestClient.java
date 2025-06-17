@@ -12,7 +12,7 @@ public class RandomNameRestClient {
 
     private final RestClient restClient;
 
-    public String requestConfirm() {
+    public String request() {
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/api/name")
                         .queryParam("nameType", "fullname")

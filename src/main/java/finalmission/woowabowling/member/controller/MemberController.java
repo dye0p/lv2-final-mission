@@ -17,7 +17,7 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity<Long> signup(@RequestBody final LoginRequest loginRequest) {
-        final Long id = memberService.register(loginRequest);
+        final Long id = memberService.register(loginRequest.email(), loginRequest.password());
         return ResponseEntity.created(URI.create("/members/" + id)).build();
     }
 

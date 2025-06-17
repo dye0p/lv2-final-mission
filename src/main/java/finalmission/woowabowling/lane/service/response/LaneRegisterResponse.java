@@ -5,7 +5,7 @@ import finalmission.woowabowling.lane.domain.Lane;
 public record LaneRegisterResponse(
         long id,
         int number,
-        String patter
+        String patternName
 ) {
     public static LaneRegisterResponse of(final Lane lane) {
         return new LaneRegisterResponse(

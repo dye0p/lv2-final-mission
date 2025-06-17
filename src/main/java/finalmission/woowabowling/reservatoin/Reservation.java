@@ -1,5 +1,6 @@
 package finalmission.woowabowling.reservatoin;
 
+import finalmission.woowabowling.lane.Lane;
 import finalmission.woowabowling.member.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,12 +25,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @Column(nullable = false)
-    private Long laneId;
+    @JoinColumn(name = "lane_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Lane lane;
 
     @Column(nullable = false)
     private Long memberCount;
@@ -43,29 +45,29 @@ public class Reservation {
     @Column(nullable = false)
     private LocalTime time;
 
-    private Reservation(final Member member, final Long laneId, final Long memberCount, final Long gameCount,
+    private Reservation(final Member member, final Lane lane, final Long memberCount, final Long gameCount,
                         final LocalDate date, final LocalTime time) {
         this.member = member;
-        this.laneId = laneId;
+        this.lane = lane;
         this.memberCount = memberCount;
         this.gameCount = gameCount;
         this.date = date;
         this.time = time;
     }
 
-    public static Reservation from(final Member member, final Long laneId, final Long memberCount, final Long gameCount,
+    public static Reservation from(final Member member, final Lane lane, final Long memberCount, final Long gameCount,
                                    final LocalDate date, final LocalTime time) {
-        return new Reservation(member, laneId, memberCount, gameCount, date, time);
+        return new Reservation(member, lane, memberCount, gameCount, date, time);
     }
 
     public void update(
-            final long laneId,
+            final Lane lane,
             final long memberCount,
             final long gameCount,
             final LocalDate date,
             final LocalTime time
     ) {
-        this.laneId = laneId;
+        this.lane = lane;
         this.memberCount = memberCount;
         this.gameCount = gameCount;
         this.date = date;
@@ -74,5 +76,9 @@ public class Reservation {
 
     public String getMemberName() {
         return member.getName();
+    }
+
+    public int getLanNumber() {
+        return lane.getNumber();
     }
 }

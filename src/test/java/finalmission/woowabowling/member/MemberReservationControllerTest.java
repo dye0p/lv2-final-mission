@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import finalmission.woowabowling.auth.CookieProvider;
 import finalmission.woowabowling.auth.JwtTokenProvider;
+import finalmission.woowabowling.lane.Lane;
+import finalmission.woowabowling.lane.LaneRepository;
 import finalmission.woowabowling.reservatoin.Reservation;
 import finalmission.woowabowling.reservatoin.ReservationRepository;
 import finalmission.woowabowling.reservatoin.ReservationRequest;
@@ -39,6 +41,9 @@ class MemberReservationControllerTest {
     private ReservationRepository reservationRepository;
 
     @Autowired
+    private LaneRepository laneRepository;
+
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
@@ -54,8 +59,10 @@ class MemberReservationControllerTest {
     void register() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
+        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
+
         ReservationRequest request = new ReservationRequest(
-                1L,
+                savedLane.getId(),
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 1),
@@ -82,7 +89,7 @@ class MemberReservationControllerTest {
         ReservationResponse compareResponse = new ReservationResponse(
                 1L,
                 "test",
-                1L,
+                savedLane.getNumber(),
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 1),
@@ -96,13 +103,14 @@ class MemberReservationControllerTest {
     void findAll() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
+        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
 
         String token = jwtTokenProvider.createToken(savedMember);
         Cookie cookie = cookieProvider.createCookie("token", token);
 
         Reservation reservation = Reservation.from(
                 savedMember,
-                1L,
+                savedLane,
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 1),
@@ -111,7 +119,7 @@ class MemberReservationControllerTest {
 
         Reservation reservation2 = Reservation.from(
                 savedMember,
-                1L,
+                savedLane,
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 2),
@@ -143,13 +151,14 @@ class MemberReservationControllerTest {
     void cancel() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
+        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
 
         String token = jwtTokenProvider.createToken(savedMember);
         Cookie cookie = cookieProvider.createCookie("token", token);
 
         Reservation reservation = Reservation.from(
                 savedMember,
-                1L,
+                savedLane,
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 1),
@@ -179,13 +188,15 @@ class MemberReservationControllerTest {
     void update() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
+        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
+        Lane savedLane2 = laneRepository.save(Lane.of(2, "testPattern2"));
 
         String token = jwtTokenProvider.createToken(savedMember);
         Cookie cookie = cookieProvider.createCookie("token", token);
 
         Reservation reservation = Reservation.from(
                 savedMember,
-                1L,
+                savedLane,
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 1),
@@ -195,7 +206,7 @@ class MemberReservationControllerTest {
         Reservation savedReservation = reservationRepository.save(reservation);
 
         UpdateReservationRequest request = new UpdateReservationRequest(
-                2L,
+                savedLane2.getId(),
                 4L,
                 2L,
                 LocalDate.of(2025, 1, 2),
@@ -219,7 +230,7 @@ class MemberReservationControllerTest {
         ReservationResponse compareResponse = new ReservationResponse(
                 1L,
                 "test",
-                2L,
+                savedLane2.getNumber(),
                 4L,
                 2L,
                 LocalDate.of(2025, 1, 2),

@@ -1,5 +1,6 @@
 package finalmission.woowabowling.reservatoin;
 
+import finalmission.woowabowling.lane.Lane;
 import finalmission.woowabowling.member.Member;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,10 +12,11 @@ public record ReservationRequest(
         LocalDate reservationDate,
         LocalTime reservationTime
 ) {
-    public Reservation toReservation(final Member member) {
+
+    public Reservation toReservation(final Member member, final Lane lane) {
         return Reservation.from(
                 member,
-                laneId,
+                lane,
                 memberCount,
                 gameCount,
                 reservationDate,

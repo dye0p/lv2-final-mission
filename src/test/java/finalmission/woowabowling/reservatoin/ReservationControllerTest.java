@@ -2,6 +2,8 @@ package finalmission.woowabowling.reservatoin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import finalmission.woowabowling.lane.Lane;
+import finalmission.woowabowling.lane.LaneRepository;
 import finalmission.woowabowling.member.Member;
 import finalmission.woowabowling.member.MemberRepository;
 import io.restassured.RestAssured;
@@ -32,6 +34,9 @@ class ReservationControllerTest {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private LaneRepository laneRepository;
+
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
@@ -42,10 +47,11 @@ class ReservationControllerTest {
     void findAll() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
+        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
 
         Reservation reservation = Reservation.from(
                 savedMember,
-                1L,
+                savedLane,
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 1),
@@ -54,7 +60,7 @@ class ReservationControllerTest {
 
         Reservation reservation2 = Reservation.from(
                 savedMember,
-                1L,
+                savedLane,
                 3L,
                 1L,
                 LocalDate.of(2025, 1, 2),

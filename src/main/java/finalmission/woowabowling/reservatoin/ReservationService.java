@@ -1,5 +1,7 @@
 package finalmission.woowabowling.reservatoin;
 
+import finalmission.woowabowling.lane.Lane;
+import finalmission.woowabowling.lane.LaneRepository;
 import finalmission.woowabowling.member.LoginMember;
 import finalmission.woowabowling.member.Member;
 import finalmission.woowabowling.member.MemberRepository;
@@ -14,11 +16,13 @@ public class ReservationService {
 
     private final MemberRepository memberRepository;
     private final ReservationRepository reservationRepository;
+    private final LaneRepository laneRepository;
 
     @Transactional
     public ReservationResponse register(final ReservationRequest request, final Long memberId) {
         final Member member = findMember(memberId);
-        final Reservation reservation = request.toReservation(member);
+        final Lane lane = findLane(request.laneId());
+        final Reservation reservation = request.toReservation(member, lane);
         final Reservation savedReservation = reservationRepository.save(reservation);
 
         return ReservationResponse.of(savedReservation);
@@ -53,12 +57,18 @@ public class ReservationService {
     public ReservationResponse update(final LoginMember loginMember, final Long id,
                                       final UpdateReservationRequest request) {
         final Member member = findMember(loginMember.id());
+        final Lane lane = findLane(request.laneId());
         final List<Reservation> memberReservations = reservationRepository.findByMemberId(member.getId());
 
-        Reservation reservation = findReservationBy(id, memberReservations);
-        updateReservation(request, reservation);
+        final Reservation reservation = findReservationBy(id, memberReservations);
+        updateReservation(request, reservation, lane);
 
         return ReservationResponse.of(reservation);
+    }
+
+    private Lane findLane(final Long id) {
+        return laneRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 레인은 존재하지 않습니다."));
     }
 
     private Member findMember(final long id) {
@@ -73,9 +83,10 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 예약이거나, 해당 회원의 예약이 아닙니다."));
     }
 
-    private void updateReservation(final UpdateReservationRequest request, final Reservation reservation) {
+    private void updateReservation(final UpdateReservationRequest request, final Reservation reservation,
+                                   final Lane lane) {
         reservation.update(
-                request.laneId(),
+                lane,
                 request.memberCount(),
                 request.gameCount(),
                 request.reservationDate(),

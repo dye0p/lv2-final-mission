@@ -6,6 +6,8 @@ import finalmission.woowabowling.auth.CookieProvider;
 import finalmission.woowabowling.auth.JwtTokenProvider;
 import finalmission.woowabowling.lane.Lane;
 import finalmission.woowabowling.lane.LaneRepository;
+import finalmission.woowabowling.pattern.Pattern;
+import finalmission.woowabowling.pattern.PatternRepository;
 import finalmission.woowabowling.reservatoin.Reservation;
 import finalmission.woowabowling.reservatoin.ReservationRepository;
 import finalmission.woowabowling.reservatoin.ReservationRequest;
@@ -44,6 +46,9 @@ class MemberReservationControllerTest {
     private LaneRepository laneRepository;
 
     @Autowired
+    private PatternRepository patternRepository;
+
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
@@ -59,7 +64,11 @@ class MemberReservationControllerTest {
     void register() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
-        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
+
+        Pattern pattern = patternRepository.findById(1L)
+                .orElse(null);
+
+        Lane savedLane = laneRepository.save(Lane.of(1, pattern));
 
         ReservationRequest request = new ReservationRequest(
                 savedLane.getId(),
@@ -103,7 +112,10 @@ class MemberReservationControllerTest {
     void findAll() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
-        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
+        Pattern pattern = patternRepository.findById(1L)
+                .orElse(null);
+
+        Lane savedLane = laneRepository.save(Lane.of(1, pattern));
 
         String token = jwtTokenProvider.createToken(savedMember);
         Cookie cookie = cookieProvider.createCookie("token", token);
@@ -151,7 +163,11 @@ class MemberReservationControllerTest {
     void cancel() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
-        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
+
+        Pattern pattern = patternRepository.findById(1L)
+                .orElse(null);
+
+        Lane savedLane = laneRepository.save(Lane.of(1, pattern));
 
         String token = jwtTokenProvider.createToken(savedMember);
         Cookie cookie = cookieProvider.createCookie("token", token);
@@ -188,8 +204,16 @@ class MemberReservationControllerTest {
     void update() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
-        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
-        Lane savedLane2 = laneRepository.save(Lane.of(2, "testPattern2"));
+
+        Pattern pattern = patternRepository.findById(1L)
+                .orElse(null);
+
+        Lane savedLane = laneRepository.save(Lane.of(1, pattern));
+
+        Pattern pattern2 = patternRepository.findById(2L)
+                .orElse(null);
+
+        Lane savedLane2 = laneRepository.save(Lane.of(2, pattern2));
 
         String token = jwtTokenProvider.createToken(savedMember);
         Cookie cookie = cookieProvider.createCookie("token", token);

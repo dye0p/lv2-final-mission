@@ -15,7 +15,7 @@ public class LaneController {
 
     @PostMapping("/lanes")
     public ResponseEntity<LaneRegisterResponse> register(@RequestBody final LaneRegisterRequest request) {
-        final LaneRegisterResponse response = laneService.register(request.toEntity());
+        final LaneRegisterResponse response = laneService.register(request);
         return ResponseEntity.created(URI.create("/lanes" + response.id())).body(response);
     }
 }

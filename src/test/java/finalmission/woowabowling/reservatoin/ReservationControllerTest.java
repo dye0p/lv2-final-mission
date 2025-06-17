@@ -6,6 +6,8 @@ import finalmission.woowabowling.lane.Lane;
 import finalmission.woowabowling.lane.LaneRepository;
 import finalmission.woowabowling.member.Member;
 import finalmission.woowabowling.member.MemberRepository;
+import finalmission.woowabowling.pattern.Pattern;
+import finalmission.woowabowling.pattern.PatternRepository;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
@@ -37,6 +39,9 @@ class ReservationControllerTest {
     @Autowired
     private LaneRepository laneRepository;
 
+    @Autowired
+    private PatternRepository patternRepository;
+
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
@@ -47,7 +52,11 @@ class ReservationControllerTest {
     void findAll() {
         //given
         Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
-        Lane savedLane = laneRepository.save(Lane.of(1, "testPattern"));
+
+        Pattern pattern = patternRepository.findById(1L)
+                .orElse(null);
+
+        Lane savedLane = laneRepository.save(Lane.of(1, pattern));
 
         Reservation reservation = Reservation.from(
                 savedMember,

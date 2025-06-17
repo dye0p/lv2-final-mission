@@ -2,11 +2,14 @@ package finalmission.woowabowling.lane;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import finalmission.woowabowling.pattern.Pattern;
+import finalmission.woowabowling.pattern.PatternRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -19,6 +22,9 @@ class LaneControllerTest {
     @LocalServerPort
     public int port;
 
+    @Autowired
+    private PatternRepository patternRepository;
+
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
@@ -28,7 +34,10 @@ class LaneControllerTest {
     @Test
     void register() {
         //given
-        LaneRegisterRequest request = new LaneRegisterRequest(1, "testPattern");
+        Pattern pattern = patternRepository.findById(1L)
+                .orElse(null);
+
+        LaneRegisterRequest request = new LaneRegisterRequest(1, pattern.getId());
 
         //when
         LaneRegisterResponse response = RestAssured
@@ -43,7 +52,7 @@ class LaneControllerTest {
                 .as(LaneRegisterResponse.class);
 
         //then
-        LaneRegisterResponse compareResponse = new LaneRegisterResponse(1L, 1, "testPattern");
+        LaneRegisterResponse compareResponse = new LaneRegisterResponse(1L, 1, pattern.getName());
         assertThat(response).isEqualTo(compareResponse);
     }
 

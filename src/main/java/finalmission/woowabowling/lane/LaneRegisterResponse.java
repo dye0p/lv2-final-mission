@@ -5,11 +5,11 @@ public record LaneRegisterResponse(
         int number,
         String patter
 ) {
-    public static LaneRegisterResponse of(final Lane savedLane) {
+    public static LaneRegisterResponse of(final Lane lane) {
         return new LaneRegisterResponse(
-                savedLane.getId(),
-                savedLane.getNumber(),
-                savedLane.getPattern()
+                lane.getId(),
+                lane.getNumber(),
+                lane.getPatternName()
         );
     }
 

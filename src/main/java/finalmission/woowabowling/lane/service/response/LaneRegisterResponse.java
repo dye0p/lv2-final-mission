@@ -1,4 +1,4 @@
-package finalmission.woowabowling.lane;
+package finalmission.woowabowling.lane.service.response;
 
 import finalmission.woowabowling.lane.domain.Lane;
 

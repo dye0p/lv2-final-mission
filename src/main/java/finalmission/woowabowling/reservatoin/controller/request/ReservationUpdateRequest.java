@@ -1,4 +1,4 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.controller.request;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

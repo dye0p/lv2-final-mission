@@ -2,8 +2,8 @@ package finalmission.woowabowling.lane.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import finalmission.woowabowling.lane.LaneRegisterRequest;
-import finalmission.woowabowling.lane.LaneRegisterResponse;
+import finalmission.woowabowling.lane.controller.request.LaneRegisterRequest;
+import finalmission.woowabowling.lane.service.response.LaneRegisterResponse;
 import finalmission.woowabowling.pattern.domain.Pattern;
 import finalmission.woowabowling.pattern.domain.PatternRepository;
 import io.restassured.RestAssured;

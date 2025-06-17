@@ -1,10 +1,10 @@
 package finalmission.woowabowling.reservatoin.controller;
 
-import finalmission.woowabowling.member.LoginMember;
-import finalmission.woowabowling.reservatoin.ReservationRegisterRequest;
-import finalmission.woowabowling.reservatoin.ReservationRegisterResponse;
-import finalmission.woowabowling.reservatoin.ReservationUpdateRequest;
+import finalmission.woowabowling.auth.service.response.LoginMember;
+import finalmission.woowabowling.reservatoin.controller.request.ReservationRegisterRequest;
+import finalmission.woowabowling.reservatoin.controller.request.ReservationUpdateRequest;
 import finalmission.woowabowling.reservatoin.service.ReservationService;
+import finalmission.woowabowling.reservatoin.service.response.ReservationRegisterResponse;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

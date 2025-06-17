@@ -1,4 +1,4 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.service.response;
 
 import finalmission.woowabowling.reservatoin.domain.Reservation;
 import java.time.LocalDate;

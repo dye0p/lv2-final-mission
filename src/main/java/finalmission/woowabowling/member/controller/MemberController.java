@@ -1,6 +1,6 @@
 package finalmission.woowabowling.member.controller;
 
-import finalmission.woowabowling.member.LoginRequest;
+import finalmission.woowabowling.member.controller.request.LoginRequest;
 import finalmission.woowabowling.member.service.MemberService;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;

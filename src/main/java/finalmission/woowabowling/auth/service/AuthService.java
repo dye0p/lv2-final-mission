@@ -1,7 +1,7 @@
 package finalmission.woowabowling.auth.service;
 
 import finalmission.woowabowling.auth.JwtTokenProvider;
-import finalmission.woowabowling.member.LoginMember;
+import finalmission.woowabowling.auth.service.response.LoginMember;
 import finalmission.woowabowling.member.domain.Member;
 import finalmission.woowabowling.member.domain.MemberRepository;
 import lombok.RequiredArgsConstructor;

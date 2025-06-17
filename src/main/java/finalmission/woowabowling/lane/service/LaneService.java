@@ -1,8 +1,8 @@
 package finalmission.woowabowling.lane.service;
 
-import finalmission.woowabowling.lane.LaneRegisterResponse;
 import finalmission.woowabowling.lane.domain.Lane;
 import finalmission.woowabowling.lane.domain.LaneRepository;
+import finalmission.woowabowling.lane.service.response.LaneRegisterResponse;
 import finalmission.woowabowling.pattern.domain.Pattern;
 import finalmission.woowabowling.pattern.domain.PatternRepository;
 import lombok.RequiredArgsConstructor;

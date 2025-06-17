@@ -1,4 +1,4 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.controller.request;
 
 import finalmission.woowabowling.lane.domain.Lane;
 import finalmission.woowabowling.member.domain.Member;

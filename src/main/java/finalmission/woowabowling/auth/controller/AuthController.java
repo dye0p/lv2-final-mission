@@ -2,7 +2,7 @@ package finalmission.woowabowling.auth.controller;
 
 import finalmission.woowabowling.auth.CookieProvider;
 import finalmission.woowabowling.auth.service.AuthService;
-import finalmission.woowabowling.member.LoginRequest;
+import finalmission.woowabowling.member.controller.request.LoginRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

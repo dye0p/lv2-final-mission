@@ -1,8 +1,8 @@
 package finalmission.woowabowling.auth;
 
 import finalmission.woowabowling.auth.service.AuthService;
+import finalmission.woowabowling.auth.service.response.LoginMember;
 import finalmission.woowabowling.exception.AuthException;
-import finalmission.woowabowling.member.LoginMember;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;

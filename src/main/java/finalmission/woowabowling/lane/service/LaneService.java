@@ -1,6 +1,5 @@
 package finalmission.woowabowling.lane.service;
 
-import finalmission.woowabowling.lane.LaneRegisterRequest;
 import finalmission.woowabowling.lane.LaneRegisterResponse;
 import finalmission.woowabowling.lane.domain.Lane;
 import finalmission.woowabowling.lane.domain.LaneRepository;
@@ -18,9 +17,9 @@ public class LaneService {
     private final PatternRepository patternRepository;
 
     @Transactional
-    public LaneRegisterResponse register(final LaneRegisterRequest request) {
-        final Pattern pattern = findPattern(request.patternId());
-        final Lane lane = Lane.of(request.number(), pattern);
+    public LaneRegisterResponse register(final int number, final Long patternId) {
+        final Pattern pattern = findPattern(patternId);
+        final Lane lane = Lane.of(number, pattern);
         final Lane savedLane = laneRepository.save(lane);
         return LaneRegisterResponse.of(savedLane);
     }

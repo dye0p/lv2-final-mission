@@ -11,11 +11,13 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class ClientConfig {
 
+    private static final String BASE_URL = "https://randommer.io/";
+
     @Bean
     public RandomNameRestClient randomNameRestClient() {
         return new RandomNameRestClient(
                 RestClient.builder()
-                        .baseUrl("https://randommer.io/")
+                        .baseUrl(BASE_URL)
                         .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .build());
     }

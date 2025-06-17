@@ -28,7 +28,7 @@ public class MemberReservationController {
     public ResponseEntity<ReservationRegisterResponse> register(final LoginMember loginMember,
                                                                 @RequestBody final ReservationRegisterRequest request) {
         final ReservationRegisterResponse response = reservationService.register(request, loginMember.id());
-        return ResponseEntity.created(URI.create("/reservations" + response.id())).body(response);
+        return ResponseEntity.created(URI.create("/reservations-mine/" + response.id())).body(response);
     }
 
     @GetMapping

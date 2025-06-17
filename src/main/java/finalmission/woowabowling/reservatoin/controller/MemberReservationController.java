@@ -33,7 +33,7 @@ public class MemberReservationController {
 
     @GetMapping
     public ResponseEntity<List<ReservationResponse>> findAll(final LoginMember loginMember) {
-        final List<ReservationResponse> response = reservationService.finaAllByMember(loginMember);
+        final List<ReservationResponse> response = reservationService.findAllByMember(loginMember);
         return ResponseEntity.ok(response);
     }
 

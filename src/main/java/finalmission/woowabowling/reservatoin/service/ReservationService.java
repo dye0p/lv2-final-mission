@@ -40,7 +40,7 @@ public class ReservationService {
                 .toList();
     }
 
-    public List<ReservationResponse> finaAllByMember(final LoginMember loginMember) {
+    public List<ReservationResponse> findAllByMember(final LoginMember loginMember) {
         final List<Reservation> reservations = reservationRepository.findByMemberId(loginMember.id());
         return reservations.stream()
                 .map(ReservationResponse::of)

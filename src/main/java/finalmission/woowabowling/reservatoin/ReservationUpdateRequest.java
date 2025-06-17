@@ -3,7 +3,7 @@ package finalmission.woowabowling.reservatoin;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record UpdateReservationRequest(
+public record ReservationUpdateRequest(
         long laneId,
         long memberCount,
         long gameCount,

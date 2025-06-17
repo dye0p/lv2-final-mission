@@ -8,7 +8,7 @@ import finalmission.woowabowling.member.domain.Member;
 import finalmission.woowabowling.member.domain.MemberRepository;
 import finalmission.woowabowling.pattern.domain.Pattern;
 import finalmission.woowabowling.pattern.domain.PatternRepository;
-import finalmission.woowabowling.reservatoin.ReservationResponse;
+import finalmission.woowabowling.reservatoin.ReservationRegisterResponse;
 import finalmission.woowabowling.reservatoin.domain.Reservation;
 import finalmission.woowabowling.reservatoin.domain.ReservationRepository;
 import io.restassured.RestAssured;
@@ -83,7 +83,7 @@ class ReservationControllerTest {
         reservationRepository.save(reservation2);
 
         //when
-        List<ReservationResponse> response = RestAssured
+        List<ReservationRegisterResponse> response = RestAssured
                 .given().log().all()
                 .contentType(ContentType.JSON)
                 .when()

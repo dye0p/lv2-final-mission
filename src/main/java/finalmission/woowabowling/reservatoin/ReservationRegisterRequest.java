@@ -6,7 +6,7 @@ import finalmission.woowabowling.reservatoin.domain.Reservation;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record ReservationRequest(
+public record ReservationRegisterRequest(
         long laneId,
         long memberCount,
         long gameCount,

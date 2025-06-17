@@ -4,7 +4,7 @@ import finalmission.woowabowling.reservatoin.domain.Reservation;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record ReservationResponse(
+public record ReservationRegisterResponse(
         long id,
         String memberName,
         int laneNumber,
@@ -14,8 +14,8 @@ public record ReservationResponse(
         LocalTime reservationTime
 ) {
 
-    public static ReservationResponse of(final Reservation savedReservation) {
-        return new ReservationResponse(
+    public static ReservationRegisterResponse of(final Reservation savedReservation) {
+        return new ReservationRegisterResponse(
                 savedReservation.getId(),
                 savedReservation.getMemberName(),
                 savedReservation.getLanNumber(),

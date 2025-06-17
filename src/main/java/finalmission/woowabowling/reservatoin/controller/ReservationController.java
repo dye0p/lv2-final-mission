@@ -1,6 +1,6 @@
 package finalmission.woowabowling.reservatoin.controller;
 
-import finalmission.woowabowling.reservatoin.ReservationResponse;
+import finalmission.woowabowling.reservatoin.ReservationRegisterResponse;
 import finalmission.woowabowling.reservatoin.service.ReservationService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,8 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @GetMapping("/reservations")
-    public ResponseEntity<List<ReservationResponse>> findAll() {
-        final List<ReservationResponse> response = reservationService.findAll();
+    public ResponseEntity<List<ReservationRegisterResponse>> findAll() {
+        final List<ReservationRegisterResponse> response = reservationService.findAll();
         return ResponseEntity.ok(response);
     }
 }

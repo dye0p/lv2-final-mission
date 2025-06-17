@@ -10,9 +10,9 @@ import finalmission.woowabowling.member.domain.Member;
 import finalmission.woowabowling.member.domain.MemberRepository;
 import finalmission.woowabowling.pattern.domain.Pattern;
 import finalmission.woowabowling.pattern.domain.PatternRepository;
-import finalmission.woowabowling.reservatoin.ReservationRequest;
-import finalmission.woowabowling.reservatoin.ReservationResponse;
-import finalmission.woowabowling.reservatoin.UpdateReservationRequest;
+import finalmission.woowabowling.reservatoin.ReservationRegisterRequest;
+import finalmission.woowabowling.reservatoin.ReservationRegisterResponse;
+import finalmission.woowabowling.reservatoin.ReservationUpdateRequest;
 import finalmission.woowabowling.reservatoin.domain.Reservation;
 import finalmission.woowabowling.reservatoin.domain.ReservationRepository;
 import io.restassured.RestAssured;
@@ -72,7 +72,7 @@ class MemberReservationControllerTest {
 
         Lane savedLane = laneRepository.save(Lane.of(1, pattern));
 
-        ReservationRequest request = new ReservationRequest(
+        ReservationRegisterRequest request = new ReservationRegisterRequest(
                 savedLane.getId(),
                 3L,
                 1L,
@@ -84,7 +84,7 @@ class MemberReservationControllerTest {
         Cookie cookie = cookieProvider.createCookie("token", token);
 
         //when
-        ReservationResponse response = RestAssured
+        ReservationRegisterResponse response = RestAssured
                 .given().log().all()
                 .contentType(ContentType.JSON)
                 .cookie(cookie.getName(), cookie.getValue())
@@ -94,10 +94,10 @@ class MemberReservationControllerTest {
                 .then().log().all()
                 .statusCode(201)
                 .extract()
-                .as(ReservationResponse.class);
+                .as(ReservationRegisterResponse.class);
 
         //then
-        ReservationResponse compareResponse = new ReservationResponse(
+        ReservationRegisterResponse compareResponse = new ReservationRegisterResponse(
                 1L,
                 "test",
                 savedLane.getNumber(),
@@ -144,7 +144,7 @@ class MemberReservationControllerTest {
         reservationRepository.save(reservation2);
 
         //when
-        List<ReservationResponse> response = RestAssured
+        List<ReservationRegisterResponse> response = RestAssured
                 .given().log().all()
                 .contentType(ContentType.JSON)
                 .cookie(cookie.getName(), cookie.getValue())
@@ -231,7 +231,7 @@ class MemberReservationControllerTest {
 
         Reservation savedReservation = reservationRepository.save(reservation);
 
-        UpdateReservationRequest request = new UpdateReservationRequest(
+        ReservationUpdateRequest request = new ReservationUpdateRequest(
                 savedLane2.getId(),
                 4L,
                 2L,
@@ -240,7 +240,7 @@ class MemberReservationControllerTest {
         );
 
         //when
-        ReservationResponse response = RestAssured
+        ReservationRegisterResponse response = RestAssured
                 .given().log().all()
                 .contentType(ContentType.JSON)
                 .cookie(cookie.getName(), cookie.getValue())
@@ -250,10 +250,10 @@ class MemberReservationControllerTest {
                 .then().log().all()
                 .statusCode(200)
                 .extract()
-                .as(ReservationResponse.class);
+                .as(ReservationRegisterResponse.class);
 
         //then
-        ReservationResponse compareResponse = new ReservationResponse(
+        ReservationRegisterResponse compareResponse = new ReservationRegisterResponse(
                 1L,
                 "test",
                 savedLane2.getNumber(),

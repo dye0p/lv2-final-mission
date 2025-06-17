@@ -2,12 +2,11 @@ package finalmission.woowabowling.reservatoin.service;
 
 import finalmission.woowabowling.lane.domain.Lane;
 import finalmission.woowabowling.lane.domain.LaneRepository;
-import finalmission.woowabowling.member.LoginMember;
 import finalmission.woowabowling.member.domain.Member;
 import finalmission.woowabowling.member.domain.MemberRepository;
-import finalmission.woowabowling.reservatoin.ReservationRequest;
-import finalmission.woowabowling.reservatoin.ReservationResponse;
-import finalmission.woowabowling.reservatoin.UpdateReservationRequest;
+import finalmission.woowabowling.reservatoin.ReservationRegisterRequest;
+import finalmission.woowabowling.reservatoin.ReservationRegisterResponse;
+import finalmission.woowabowling.reservatoin.ReservationUpdateRequest;
 import finalmission.woowabowling.reservatoin.domain.Reservation;
 import finalmission.woowabowling.reservatoin.domain.ReservationRepository;
 import java.util.List;
@@ -24,32 +23,32 @@ public class ReservationService {
     private final LaneRepository laneRepository;
 
     @Transactional
-    public ReservationResponse register(final ReservationRequest request, final Long memberId) {
+    public ReservationRegisterResponse register(final ReservationRegisterRequest request, final Long memberId) {
         final Member member = findMember(memberId);
         final Lane lane = findLane(request.laneId());
         final Reservation reservation = request.toReservation(member, lane);
         final Reservation savedReservation = reservationRepository.save(reservation);
 
-        return ReservationResponse.of(savedReservation);
+        return ReservationRegisterResponse.of(savedReservation);
     }
 
-    public List<ReservationResponse> findAll() {
+    public List<ReservationRegisterResponse> findAll() {
         final List<Reservation> reservations = reservationRepository.findAll();
         return reservations.stream()
-                .map(ReservationResponse::of)
+                .map(ReservationRegisterResponse::of)
                 .toList();
     }
 
-    public List<ReservationResponse> findAllByMember(final LoginMember loginMember) {
-        final List<Reservation> reservations = reservationRepository.findByMemberId(loginMember.id());
+    public List<ReservationRegisterResponse> findAllByMember(final Long loginMemberId) {
+        final List<Reservation> reservations = reservationRepository.findByMemberId(loginMemberId);
         return reservations.stream()
-                .map(ReservationResponse::of)
+                .map(ReservationRegisterResponse::of)
                 .toList();
     }
 
     @Transactional
-    public Long cancel(final LoginMember loginMember, final Long id) {
-        final Member member = findMember(loginMember.id());
+    public Long cancel(final Long loginMemberId, final Long id) {
+        final Member member = findMember(loginMemberId);
         final List<Reservation> memberReservations = reservationRepository.findByMemberId(member.getId());
 
         final Reservation reservation = findReservationBy(id, memberReservations);
@@ -59,16 +58,16 @@ public class ReservationService {
     }
 
     @Transactional
-    public ReservationResponse update(final LoginMember loginMember, final Long id,
-                                      final UpdateReservationRequest request) {
-        final Member member = findMember(loginMember.id());
+    public ReservationRegisterResponse update(final Long loginMemberId, final Long id,
+                                              final ReservationUpdateRequest request) {
+        final Member member = findMember(loginMemberId);
         final Lane lane = findLane(request.laneId());
         final List<Reservation> memberReservations = reservationRepository.findByMemberId(member.getId());
 
         final Reservation reservation = findReservationBy(id, memberReservations);
         updateReservation(request, reservation, lane);
 
-        return ReservationResponse.of(reservation);
+        return ReservationRegisterResponse.of(reservation);
     }
 
     private Member findMember(final long id) {
@@ -88,7 +87,7 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 예약이거나, 해당 회원의 예약이 아닙니다."));
     }
 
-    private void updateReservation(final UpdateReservationRequest request, final Reservation reservation,
+    private void updateReservation(final ReservationUpdateRequest request, final Reservation reservation,
                                    final Lane lane) {
         reservation.update(
                 lane,

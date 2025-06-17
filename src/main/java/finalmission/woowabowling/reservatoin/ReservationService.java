@@ -66,14 +66,14 @@ public class ReservationService {
         return ReservationResponse.of(reservation);
     }
 
-    private Lane findLane(final Long id) {
-        return laneRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 레인은 존재하지 않습니다."));
-    }
-
     private Member findMember(final long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+    }
+
+    private Lane findLane(final Long id) {
+        return laneRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 레인은 존재하지 않습니다."));
     }
 
     private Reservation findReservationBy(final Long id, final List<Reservation> memberReservations) {

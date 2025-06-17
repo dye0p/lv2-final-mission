@@ -1,5 +1,6 @@
 package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.exception.AuthException;
 import finalmission.woowabowling.member.LoginMember;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,7 +41,7 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
 
     private void validateNull(final Cookie[] cookies) {
         if (cookies == null || cookies.length == 0) {
-            throw new IllegalArgumentException("토큰을 찾을 수 없습니다.");
+            throw new AuthException("토큰을 찾을 수 없습니다.");
         }
     }
 

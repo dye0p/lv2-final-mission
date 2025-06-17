@@ -1,5 +1,6 @@
 package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.exception.AuthException;
 import jakarta.servlet.http.Cookie;
 import java.util.Arrays;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,6 @@ public class JwtExtractor {
                 .filter(cookie -> cookie.getName().equals(name))
                 .map(Cookie::getValue)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new AuthException("토큰을 찾을 수 없습니다."));
     }
 }

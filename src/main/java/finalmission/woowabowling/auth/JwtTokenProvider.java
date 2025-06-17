@@ -1,5 +1,6 @@
 package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.exception.AuthException;
 import finalmission.woowabowling.member.Member;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtParser;
@@ -38,9 +39,9 @@ public class JwtTokenProvider {
         try {
             getParse().parseClaimsJws(token);
         } catch (final ExpiredJwtException e) {
-            throw new IllegalArgumentException("유효시간이 만료된 토큰입니다.");
+            throw new AuthException("유효시간이 만료된 토큰입니다.");
         } catch (final MalformedJwtException | SignatureException | UnsupportedJwtException e) {
-            throw new IllegalArgumentException("유효하지 않은 토큰입니다.");
+            throw new AuthException("유효하지 않은 토큰입니다.");
         } catch (final IllegalArgumentException e) {
             throw new IllegalArgumentException("토큰이 비어있습니다.");
         }

@@ -117,8 +117,6 @@ class MemberReservationControllerTest {
         );
 
         assertThat(responseLocation).isEqualTo("/reservations-mine/1");
-
-
     }
 
     @DisplayName("사용자 자신의 예약 정보 조회에 성공하면 상태코드 200 OK와 예약 정보를 담은 리스트가 반환된다.")

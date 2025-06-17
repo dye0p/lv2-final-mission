@@ -1,6 +1,7 @@
 package finalmission.woowabowling.reservatoin.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import finalmission.woowabowling.auth.CookieProvider;
 import finalmission.woowabowling.auth.JwtTokenProvider;
@@ -18,6 +19,9 @@ import finalmission.woowabowling.reservatoin.service.response.ReservationRegiste
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import jakarta.servlet.http.Cookie;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -61,7 +65,7 @@ class MemberReservationControllerTest {
         RestAssured.port = port;
     }
 
-    @DisplayName("특정 사용자의 예약 등록에 성공하면 상태코드 201CREATED와 예약 정보를 담은 객체가 반환된다.")
+    @DisplayName("특정 사용자의 예약 등록에 성공하면 상태코드 201CREATED와 예약 생성 경로 + 예약 정보를 담은 객체가 반환된다.")
     @Test
     void register() {
         //given
@@ -84,7 +88,7 @@ class MemberReservationControllerTest {
         Cookie cookie = cookieProvider.createCookie("token", token);
 
         //when
-        ReservationRegisterResponse response = RestAssured
+        ExtractableResponse<Response> response = RestAssured
                 .given().log().all()
                 .contentType(ContentType.JSON)
                 .cookie(cookie.getName(), cookie.getValue())
@@ -93,20 +97,28 @@ class MemberReservationControllerTest {
                 .post("/reservations-mine")
                 .then().log().all()
                 .statusCode(201)
-                .extract()
-                .as(ReservationRegisterResponse.class);
+                .extract();
+
+        JsonPath result = response.jsonPath();
+        String responseLocation = response.header("Location");
 
         //then
-        ReservationRegisterResponse compareResponse = new ReservationRegisterResponse(
-                1L,
-                "test",
-                savedLane.getNumber(),
-                3L,
-                1L,
-                LocalDate.of(2025, 1, 1),
-                LocalTime.of(10, 0)
+        assertAll(
+                () -> assertThat(result.getLong("id")).isEqualTo(1L),
+                () -> assertThat(result.getInt("laneNumber")).isEqualTo(1),
+                () -> assertThat(result.getLong("memberCount")).isEqualTo(3L),
+                () -> assertThat(result.getLong("gameCount")).isEqualTo(1L),
+
+                () -> assertThat(result.getString("reservationDate"))
+                        .isEqualTo("2025-01-01"),
+
+                () -> assertThat(result.getString("reservationTime"))
+                        .isEqualTo("10:00:00")
         );
-        assertThat(response).isEqualTo(compareResponse);
+
+        assertThat(responseLocation).isEqualTo("/reservations-mine/1");
+
+
     }
 
     @DisplayName("사용자 자신의 예약 정보 조회에 성공하면 상태코드 200 OK와 예약 정보를 담은 리스트가 반환된다.")

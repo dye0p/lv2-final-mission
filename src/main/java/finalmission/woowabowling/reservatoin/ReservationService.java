@@ -16,8 +16,8 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
 
     @Transactional
-    public ReservationResponse register(final ReservationRequest request) {
-        final Member member = findMember(request.memberId());
+    public ReservationResponse register(final ReservationRequest request, final Long memberId) {
+        final Member member = findMember(memberId);
         final Reservation reservation = request.toReservation(member);
         final Reservation savedReservation = reservationRepository.save(reservation);
 

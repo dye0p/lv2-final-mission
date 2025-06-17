@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record ReservationRequest(
-
-        long memberId,
         long laneId,
         long memberCount,
         long gameCount,

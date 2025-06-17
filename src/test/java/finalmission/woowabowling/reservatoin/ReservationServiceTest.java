@@ -23,7 +23,7 @@ class ReservationServiceTest {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @DisplayName("예약을 저장할 수 있다.")
+    @DisplayName("특정 사용자의 예약을 저장할 수 있다.")
     @Test
     void register() {
         //given
@@ -31,7 +31,6 @@ class ReservationServiceTest {
         Member savedMember = memberRepository.save(member);
 
         ReservationRequest request = new ReservationRequest(
-                savedMember.getId(),
                 1L,
                 3L,
                 4L,
@@ -39,7 +38,7 @@ class ReservationServiceTest {
                 LocalTime.of(10, 0));
 
         //when
-        ReservationResponse actual = reservationService.register(request);
+        ReservationResponse actual = reservationService.register(request, member.getId());
 
         //then
         assertThat(actual.id()).isEqualTo(1L);

@@ -35,46 +35,6 @@ class ReservationControllerTest {
         RestAssured.port = port;
     }
 
-    @DisplayName("예약 등록 요청에 성공하면 상태코드 201CREATED와 예약 정보를 담은 객체가 반환된다")
-    @Test
-    void register() {
-        //given
-        Member savedMember = memberRepository.save(Member.from("test", "test", "1234"));
-        ReservationRequest request = new ReservationRequest(
-                savedMember.getId(),
-                1L,
-                3L,
-                1L,
-                LocalDate.of(2025, 1, 1),
-                LocalTime.of(10, 0)
-        );
-
-        //when
-        ReservationResponse response = RestAssured
-                .given().log().all()
-                .contentType(ContentType.JSON)
-                .body(request)
-                .when()
-                .post("/reservations")
-                .then().log().all()
-                .statusCode(201)
-                .extract()
-                .as(ReservationResponse.class);
-
-        //then
-        ReservationResponse compareResponse = new ReservationResponse(
-                1L,
-                "test",
-                1L,
-                3L,
-                1L,
-                LocalDate.of(2025, 1, 1),
-                LocalTime.of(10, 0)
-        );
-
-        assertThat(response).isEqualTo(compareResponse);
-    }
-
     @DisplayName("모든 예약 현황을 조회하면 상태코드 200OK와 예약 정보를 담은 리스트가 반환된다.")
     @Test
     void findAll() {

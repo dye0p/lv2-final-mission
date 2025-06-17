@@ -1,5 +1,7 @@
 package finalmission.woowabowling.lane;
 
+import finalmission.woowabowling.lane.domain.Lane;
+
 public record LaneRegisterResponse(
         long id,
         int number,

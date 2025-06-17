@@ -1,5 +1,7 @@
-package finalmission.woowabowling.auth;
+package finalmission.woowabowling.auth.controller;
 
+import finalmission.woowabowling.auth.CookieProvider;
+import finalmission.woowabowling.auth.service.AuthService;
 import finalmission.woowabowling.member.LoginRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

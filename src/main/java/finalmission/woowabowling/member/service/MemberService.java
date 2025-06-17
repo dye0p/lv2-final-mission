@@ -1,6 +1,9 @@
-package finalmission.woowabowling.member;
+package finalmission.woowabowling.member.service;
 
 import finalmission.woowabowling.client.RandomNameRestClient;
+import finalmission.woowabowling.member.LoginRequest;
+import finalmission.woowabowling.member.domain.Member;
+import finalmission.woowabowling.member.domain.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

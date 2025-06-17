@@ -1,7 +1,11 @@
-package finalmission.woowabowling.lane;
+package finalmission.woowabowling.lane.service;
 
-import finalmission.woowabowling.pattern.Pattern;
-import finalmission.woowabowling.pattern.PatternRepository;
+import finalmission.woowabowling.lane.LaneRegisterRequest;
+import finalmission.woowabowling.lane.LaneRegisterResponse;
+import finalmission.woowabowling.lane.domain.Lane;
+import finalmission.woowabowling.lane.domain.LaneRepository;
+import finalmission.woowabowling.pattern.domain.Pattern;
+import finalmission.woowabowling.pattern.domain.PatternRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

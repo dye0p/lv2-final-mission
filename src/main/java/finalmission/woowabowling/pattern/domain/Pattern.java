@@ -1,4 +1,4 @@
-package finalmission.woowabowling.member;
+package finalmission.woowabowling.pattern.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Member {
+public class Pattern {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +21,6 @@ public class Member {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
     @Column(nullable = false)
-    private String password;
-
-    private Member(final String name, final String email, final String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    public static Member from(final String name, final String email, final String password) {
-        return new Member(name, email, password);
-    }
+    private int feet;
 }

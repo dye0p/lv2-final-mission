@@ -1,5 +1,6 @@
 package finalmission.woowabowling.auth;
 
+import finalmission.woowabowling.auth.service.AuthService;
 import finalmission.woowabowling.exception.AuthException;
 import finalmission.woowabowling.member.LoginMember;
 import jakarta.servlet.http.Cookie;

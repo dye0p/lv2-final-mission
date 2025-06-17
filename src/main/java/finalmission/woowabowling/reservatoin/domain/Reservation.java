@@ -1,7 +1,7 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.domain;
 
-import finalmission.woowabowling.lane.Lane;
-import finalmission.woowabowling.member.Member;
+import finalmission.woowabowling.lane.domain.Lane;
+import finalmission.woowabowling.member.domain.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

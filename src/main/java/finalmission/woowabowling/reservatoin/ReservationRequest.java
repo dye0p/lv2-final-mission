@@ -1,7 +1,8 @@
 package finalmission.woowabowling.reservatoin;
 
-import finalmission.woowabowling.lane.Lane;
-import finalmission.woowabowling.member.Member;
+import finalmission.woowabowling.lane.domain.Lane;
+import finalmission.woowabowling.member.domain.Member;
+import finalmission.woowabowling.reservatoin.domain.Reservation;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

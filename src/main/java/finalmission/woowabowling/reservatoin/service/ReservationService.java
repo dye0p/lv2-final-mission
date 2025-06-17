@@ -1,10 +1,15 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.service;
 
-import finalmission.woowabowling.lane.Lane;
-import finalmission.woowabowling.lane.LaneRepository;
+import finalmission.woowabowling.lane.domain.Lane;
+import finalmission.woowabowling.lane.domain.LaneRepository;
 import finalmission.woowabowling.member.LoginMember;
-import finalmission.woowabowling.member.Member;
-import finalmission.woowabowling.member.MemberRepository;
+import finalmission.woowabowling.member.domain.Member;
+import finalmission.woowabowling.member.domain.MemberRepository;
+import finalmission.woowabowling.reservatoin.ReservationRequest;
+import finalmission.woowabowling.reservatoin.ReservationResponse;
+import finalmission.woowabowling.reservatoin.UpdateReservationRequest;
+import finalmission.woowabowling.reservatoin.domain.Reservation;
+import finalmission.woowabowling.reservatoin.domain.ReservationRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

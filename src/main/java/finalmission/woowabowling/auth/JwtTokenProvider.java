@@ -1,7 +1,7 @@
 package finalmission.woowabowling.auth;
 
 import finalmission.woowabowling.exception.AuthException;
-import finalmission.woowabowling.member.Member;
+import finalmission.woowabowling.member.domain.Member;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;

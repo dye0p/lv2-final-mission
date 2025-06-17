@@ -1,5 +1,6 @@
-package finalmission.woowabowling.auth;
+package finalmission.woowabowling.config;
 
+import finalmission.woowabowling.auth.LoginMemberArgumentResolver;
 import java.util.List;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

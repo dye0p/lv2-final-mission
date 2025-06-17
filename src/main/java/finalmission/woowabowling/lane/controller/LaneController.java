@@ -1,5 +1,8 @@
-package finalmission.woowabowling.lane;
+package finalmission.woowabowling.lane.controller;
 
+import finalmission.woowabowling.lane.LaneRegisterRequest;
+import finalmission.woowabowling.lane.LaneRegisterResponse;
+import finalmission.woowabowling.lane.service.LaneService;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

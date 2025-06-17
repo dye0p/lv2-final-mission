@@ -1,4 +1,4 @@
-package finalmission.woowabowling.pattern;
+package finalmission.woowabowling.pattern.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

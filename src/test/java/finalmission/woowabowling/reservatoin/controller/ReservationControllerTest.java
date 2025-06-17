@@ -1,13 +1,16 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import finalmission.woowabowling.lane.Lane;
-import finalmission.woowabowling.lane.LaneRepository;
-import finalmission.woowabowling.member.Member;
-import finalmission.woowabowling.member.MemberRepository;
-import finalmission.woowabowling.pattern.Pattern;
-import finalmission.woowabowling.pattern.PatternRepository;
+import finalmission.woowabowling.lane.domain.Lane;
+import finalmission.woowabowling.lane.domain.LaneRepository;
+import finalmission.woowabowling.member.domain.Member;
+import finalmission.woowabowling.member.domain.MemberRepository;
+import finalmission.woowabowling.pattern.domain.Pattern;
+import finalmission.woowabowling.pattern.domain.PatternRepository;
+import finalmission.woowabowling.reservatoin.ReservationResponse;
+import finalmission.woowabowling.reservatoin.domain.Reservation;
+import finalmission.woowabowling.reservatoin.domain.ReservationRepository;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;

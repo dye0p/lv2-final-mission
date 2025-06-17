@@ -1,5 +1,7 @@
 package finalmission.woowabowling.member;
 
+import finalmission.woowabowling.member.domain.Member;
+
 public record LoginRequest(
 
         String email,

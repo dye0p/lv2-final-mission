@@ -1,9 +1,11 @@
-package finalmission.woowabowling.lane;
+package finalmission.woowabowling.lane.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import finalmission.woowabowling.pattern.Pattern;
-import finalmission.woowabowling.pattern.PatternRepository;
+import finalmission.woowabowling.lane.LaneRegisterRequest;
+import finalmission.woowabowling.lane.LaneRegisterResponse;
+import finalmission.woowabowling.pattern.domain.Pattern;
+import finalmission.woowabowling.pattern.domain.PatternRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;

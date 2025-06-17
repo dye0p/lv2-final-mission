@@ -1,5 +1,7 @@
-package finalmission.woowabowling.reservatoin;
+package finalmission.woowabowling.reservatoin.controller;
 
+import finalmission.woowabowling.reservatoin.ReservationResponse;
+import finalmission.woowabowling.reservatoin.service.ReservationService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

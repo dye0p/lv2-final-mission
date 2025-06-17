@@ -1,5 +1,6 @@
 package finalmission.woowabowling.reservatoin;
 
+import finalmission.woowabowling.reservatoin.domain.Reservation;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

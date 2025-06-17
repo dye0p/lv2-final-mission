@@ -56,6 +56,7 @@ class LaneControllerTest {
                 .extract();
 
         JsonPath result = response.jsonPath();
+        String responseLocation = response.header("Location");
 
         //then
         assertAll(
@@ -63,6 +64,7 @@ class LaneControllerTest {
                 () -> assertThat(result.getInt("number")).isEqualTo(1),
                 () -> assertThat(result.getString("patternName")).isEqualTo("치타Cheetah)")
         );
+        assertThat(responseLocation).isEqualTo("/lanes/1");
 
     }
 

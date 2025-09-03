@@ -3,7 +3,7 @@ name: dev-cd
 on:
   push:
     branches:
-      - main   # main 브랜치 푸시 시 배포
+      - develop   # main 브랜치 푸시 시 배포
 
 jobs:
   deploy:
